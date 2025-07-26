@@ -22,4 +22,4 @@ COPY --from=builder /usr/src/app/package.json .
 
 EXPOSE 3000
 
-CMD ["bun", "run", "build/index.js"]
+CMD ["bun", "run", "start"]
