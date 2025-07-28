@@ -1,7 +1,7 @@
 export function Welcome() {
   return (
-    <main className="flex items-center justify-center pt-16 pb-4">
-      <h1>New Chemsys</h1>
+    <main className="flex">
+      <h1 className="text-lg">New Chemsys</h1>
     </main>
   );
 }
