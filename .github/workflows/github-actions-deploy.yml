@@ -7,7 +7,6 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
-  CONTAINER_NAME: chemsys
 
 jobs:
   build-and-deploy:
@@ -32,27 +31,18 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest,${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
 
-      - name: Deploy to Droplet
+      - name: Deploy with Docker Compose
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.DROPLET_HOST }}
           username: ${{ secrets.DROPLET_USERNAME }}
           key: ${{ secrets.DROPLET_SSH_KEY }}
           script: |
-            # Log in to the GitHub Container Registry
+            cd ~/chemsys
+            git pull origin main
             echo ${{ secrets.GITHUB_TOKEN }} | docker login ${{ env.REGISTRY }} -u ${{ github.actor }} --password-stdin
-
-            # Pull the latest version of the image
-            docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
-
-            # Stop the existing container if it's running
-            docker stop ${{ env.CONTAINER_NAME }} || true
-
-            # Remove the old container
-            docker rm ${{ env.CONTAINER_NAME }} || true
-
-            # Run the new container from the updated image
-            # Make sure to change the port mapping (-p) to match your application
-            docker run -d --name ${{ env.CONTAINER_NAME }} -p 80:3000 ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+            docker compose pull
+            docker compose up -d --force-recreate
+            docker image prune -af

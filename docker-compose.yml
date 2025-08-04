@@ -1,9 +1,21 @@
 version: '3.8'
 services:
+  webapp:
+    image: ghcr.io/marshmallow-eater/chemsys
+    container_name: chemsys-app
+    restart: unless-stopped
+    ports:
+      - "80:3000"
+    volumes:
+      - images:/images
+    depends_on:
+      - couchdb
+
   couchdb:
     image: couchdb:3.3.2
     container_name: chemsys-db
     environment:
+      # These variables are loaded from the .env file on your server
       - COUCHDB_USER=${COUCHDB_USER}
       - COUCHDB_PASSWORD=${COUCHDB_PASSWORD}
     ports:
@@ -11,7 +23,11 @@ services:
     volumes:
       - couchdb-data:/opt/couchdb/data
     restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+
 volumes:
   couchdb-data:
-    driver: local
-
+  images:
