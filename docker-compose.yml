@@ -16,6 +16,7 @@ services:
     container_name: chemsys-db
     environment:
       # These variables are loaded from the .env file on your server
+      - COUCHDB_HOST=couchdb
       - COUCHDB_USER=${COUCHDB_USER}
       - COUCHDB_PASSWORD=${COUCHDB_PASSWORD}
     ports:
