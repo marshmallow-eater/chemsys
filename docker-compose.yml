@@ -24,7 +24,7 @@ services:
     volumes:
       - couchdb-data:/opt/couchdb/data
     restart: unless-stopped
-    mem_limits: 512M
+    mem_limit: 512M
 
 volumes:
   couchdb-data:
