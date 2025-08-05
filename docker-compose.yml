@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   webapp:
-    image: ghcr.io/marshmallow-eater/chemsys
+    image: ghcr.io/marshmallow-eater/chemsys:latest
     container_name: chemsys-app
     restart: unless-stopped
     ports:
