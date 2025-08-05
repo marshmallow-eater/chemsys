@@ -13,7 +13,7 @@ services:
 
   couchdb:
     image: couchdb:3.3.2
-    container_name: chemsys-db
+    container_name: chemsys-couch
     environment:
       # These variables are loaded from the .env file on your server
       - COUCHDB_HOST=${COUCHDB_HOST}
