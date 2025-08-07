@@ -1,7 +1,3 @@
-import Nano from 'nano'
+import mongoose from 'mongoose'
 
-const env = process.env
-
-const n = Nano(`http://${env.COUCHDB_USER}:${env.COUCHDB_PASSWORD}@${env.COUCHDB_HOST ?? 'localhost'}:${env.COUCHDB_PORT}`)
-
-export const db = n.db.use(process.env.COUCHDB_DBNAME as string)
+export const db = mongoose.createConnection(process.env.DATABASE_URL as string)

@@ -8,24 +8,6 @@ services:
       - "80:3000"
     volumes:
       - images:/images
-    depends_on:
-      - couchdb
-
-  couchdb:
-    image: couchdb:3.3.2
-    container_name: chemsys-couch
-    environment:
-      # These variables are loaded from the .env file on your server
-      - COUCHDB_HOST=${COUCHDB_HOST}
-      - COUCHDB_USER=${COUCHDB_USER}
-      - COUCHDB_PASSWORD=${COUCHDB_PASSWORD}
-    ports:
-      - "${COUCHDB_PORT}:5984"
-    volumes:
-      - couchdb-data:/opt/couchdb/data
-    restart: unless-stopped
-    mem_limit: 512M
 
 volumes:
-  couchdb-data:
   images:

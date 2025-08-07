@@ -1,6 +1,6 @@
 import { useLoaderData } from 'react-router'
 
-import * as mainContent from '~/model/mainContent'
+import { getMainPage } from '~/model/Posts'
 
 export function meta() {
   return [
@@ -15,16 +15,16 @@ export function meta() {
 const LANG = 'ua'
 
 export async function loader() {
-  return mainContent.get(LANG)
+  return getMainPage(LANG)
 }
 
 export default function Home() {
-  const { about, title } = useLoaderData<typeof loader>()
+  const { title, content } = useLoaderData<typeof loader>()
 
   return (
     <div>
       <h1 dangerouslySetInnerHTML={{ __html: title }} />
-      <div dangerouslySetInnerHTML={{ __html: about }} />
+      <div dangerouslySetInnerHTML={{ __html: content }} />
     </div>
   )
 }
