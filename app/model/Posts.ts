@@ -12,6 +12,18 @@ const postSchema = new Schema({
 
 const Post = db.model('Posts', postSchema)
 
+export const getContactPage = async (lang: 'en' | 'ua' | 'ru') => {
+  const contactPagePost = await Post.findOne({ name: 'contact-page' })
+  if (!contactPagePost) {
+    throw 'no  contact page post'
+  }
+
+  return {
+    title: 'title',
+    content: 'some content',
+  }
+}
+
 export const getMainPage = async (lang: 'en' | 'ua' | 'ru') => {
   const mainPagePost = await Post.findOne({ name: 'main-page' })
   if (!mainPagePost) {
