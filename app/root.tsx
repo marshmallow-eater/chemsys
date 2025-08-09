@@ -7,7 +7,7 @@ import {
   ScrollRestoration,
 } from 'react-router'
 
-import {Menu}from './shared/components'
+import { Menu } from './shared/components'
 
 import type { Route } from './+types/root'
 import './app.css'
@@ -25,7 +25,11 @@ export const links: Route.LinksFunction = () => [
   },
 ]
 
-export function Layout({ children }: { children: React.ReactNode }) {
+export function Layout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   return (
     <html lang="en">
       <head>
@@ -35,8 +39,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        <Menu />
-        <div>{children}</div>
+        <div className="absolute flex h-full">
+          <Menu />
+          <div>{children}</div>
+        </div>
         <ScrollRestoration />
         <Scripts />
       </body>
