@@ -39,9 +39,11 @@ export function Layout({
         <Links />
       </head>
       <body>
-        <div className="absolute flex h-full">
-          <Menu />
-          <div>{children}</div>
+        <div className="absolute flex justify-center h-full w-full">
+          <div className="flex w-6xl">
+            <Menu />
+            <div>{children}</div>
+          </div>
         </div>
         <ScrollRestoration />
         <Scripts />

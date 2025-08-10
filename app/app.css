@@ -3,11 +3,32 @@
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+/*
+*
+* Palette  Carpathian Dawn
+
+Inspired by the misty mornings in the Carpathian Mountains, 
+this palette is calm, earthy, and organic. 
+It’s perfect for a brand that wants to feel grounded and serene.
+
+Dusty Blue: #8A9AAB
+Wheaten Yellow: #F5DEB3
+Sage Green (Accent): #A3B899
+Cream: #FFFDD0
+Earthy Brown Text: #5D4037
+*
+*/
+  --color-primary: #8A9AAB;
+  --color-secondary: #F5DEB3;
+  --color-accent: #A3B899;
+  --color-surface: #FFFDD0;
+  --color-on-surface: #5D4037;
 }
 
 html,
 body {
   @apply bg-white dark:bg-gray-950;
+
 
   @media (prefers-color-scheme: dark) {
     color-scheme: dark;
