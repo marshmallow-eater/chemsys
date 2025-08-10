@@ -10,7 +10,7 @@ const postSchema = new Schema({
   content: { type: localizedStringSchema, required: true },
 })
 
-const Post = db.model('Posts', postSchema)
+const Post = db.models.Posts || db.model('Posts', postSchema)
 
 export const getContactPage = async (lang: 'en' | 'ua' | 'ru') => {
   const contactPagePost = await Post.findOne({ name: 'contact-page' })
@@ -19,8 +19,8 @@ export const getContactPage = async (lang: 'en' | 'ua' | 'ru') => {
   }
 
   return {
-    title: 'title',
-    content: 'some content',
+    title: contactPagePost.title[lang],
+    content: contactPagePost.content[lang],
   }
 }
 
