@@ -1,6 +1,11 @@
 import { Schema } from 'mongoose'
+import type { LanguageCode } from '~/supportedLanguage'
 
-export const localizedStringSchema = new Schema({
+type LocalizedStr = {
+  [key in LanguageCode]: string
+}
+
+export const localizedStringSchema = new Schema<LocalizedStr>({
   en: {
     type: String,
     required: [true, 'English translation is required'],
